@@ -65,7 +65,7 @@ public static class NumberPickerDialogFragment extends DialogFragment implements
                 //clear current focus, must be done before retrieving value
                 numberPicker.clearFocus();
         
-                //If user typed in value get new value
+                //handles when user input value through keyboard on numberPicker
                 _current = numberPicker.getValue();
             
                 //Display current number as a test

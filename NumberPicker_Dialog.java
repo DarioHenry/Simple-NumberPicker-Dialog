@@ -5,6 +5,10 @@ public void showVolumeDialog(View view)
         bundle.putInt("min", 1);
         bundle.putInt("max", 50);
         bundle.putInt("current", 1);
+        
+        //Get string value from resource file
+        String volTitle = getResources().getString(R.string.volume_dialog_title);
+        bundle.putString("dialog_title", volTitle);
 
         //Instantiate NumberPicker Fragment
         NumberPickerDialogFragment volFragment = new NumberPickerDialogFragment();
@@ -46,7 +50,7 @@ public static class NumberPickerDialogFragment extends DialogFragment implements
 
         //Set up AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(R.string.dialog_title);
+        builder.setTitle(savedInstanceState.getString("dialog_title"));
         builder.setView(view);
         builder.setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
             @Override
@@ -58,6 +62,12 @@ public static class NumberPickerDialogFragment extends DialogFragment implements
         builder.setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
+                //clear current focus, must be done before retrieving value
+                numberPicker.clearFocus();
+        
+                //If user typed in value get new value
+                _current = numberPicker.getValue();
+            
                 //Display current number as a test
                 Toast.makeText(getActivity().getApplicationContext(), String.valueOf(_current),Toast.LENGTH_SHORT).show();
             }

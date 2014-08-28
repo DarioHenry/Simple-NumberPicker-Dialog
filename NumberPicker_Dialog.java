@@ -77,6 +77,7 @@ public static class NumberPickerDialogFragment extends DialogFragment implements
 
     @Override
     public void onValueChange(NumberPicker numberPicker, int oldVal, int newVal) {
+        //update current value
         _current = newVal;
     }
 }
